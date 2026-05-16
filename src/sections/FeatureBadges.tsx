@@ -15,24 +15,20 @@ export function FeatureBadges() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -6 }}
-            className={`flex items-center gap-3 rounded-2xl px-4 py-4 shadow-card backdrop-blur-md ${
+            className={`flex items-center gap-3 rounded-2xl px-4 py-4 text-white shadow-card backdrop-blur-md ${
               i % 2 === 0
-                ? 'border border-hairline bg-surface/95'
-                : 'grad-brand text-white'
+                ? 'border border-white/10 bg-navy/90'
+                : 'grad-brand'
             }`}
           >
             <span
               className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${
-                i % 2 === 0 ? 'bg-accent/10 text-accent' : 'bg-white/20 text-white'
+                i % 2 === 0 ? 'bg-white/10 text-cyan-glow' : 'bg-white/20 text-white'
               }`}
             >
               <Icon name={badge.icon as IconName} size={20} />
             </span>
-            <span
-              className={`font-heading text-[0.82rem] font-bold leading-tight sm:text-sm ${
-                i % 2 === 0 ? 'text-ink' : 'text-white'
-              }`}
-            >
+            <span className="font-heading text-[0.82rem] font-bold leading-tight text-white sm:text-sm">
               {badge.label}
             </span>
           </motion.div>
