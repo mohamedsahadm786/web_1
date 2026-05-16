@@ -7,6 +7,7 @@ import { heroHeadlines } from '../lib/copy';
 import { Img } from '../components/Img';
 import { Icon } from '../components/Icon';
 import { MagneticButton } from '../components/MagneticButton';
+import { supportsWebGL } from '../lib/webgl';
 
 const HeroScene = lazy(() =>
   import('../three/HeroScene').then((m) => ({ default: m.HeroScene })),
@@ -21,10 +22,8 @@ const fade = (delay: number) => ({
 export function Hero() {
   const reduced = useReducedMotion();
   const typed = useTypewriter(heroHeadlines);
-  const webgl =
-    !reduced &&
-    typeof window !== 'undefined' &&
-    !!document.createElement('canvas').getContext('webgl');
+  // probe WebGL once (cached) — never on every typewriter re-render
+  const webgl = !reduced && supportsWebGL();
 
   return (
     <section
