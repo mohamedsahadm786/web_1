@@ -1,6 +1,5 @@
 import { useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 /** Rotating DNA double-helix built from two strands of spheres + rungs. */
@@ -72,39 +71,6 @@ function Helix() {
   );
 }
 
-/** Floating capped research vial. */
-function Vial() {
-  return (
-    <Float speed={1.6} rotationIntensity={0.55} floatIntensity={1.2}>
-      <group rotation={[0.18, 0.5, 0.06]} scale={1.05}>
-        <mesh position={[0, 0.05, 0]}>
-          <cylinderGeometry args={[0.5, 0.5, 1.7, 48]} />
-          <meshPhysicalMaterial
-            color="#bfe6ff"
-            roughness={0.1}
-            metalness={0.15}
-            transparent
-            opacity={0.42}
-          />
-        </mesh>
-        <mesh position={[0, -0.32, 0]}>
-          <cylinderGeometry args={[0.46, 0.46, 0.92, 48]} />
-          <meshStandardMaterial
-            color="#02A7E3"
-            emissive="#02A7E3"
-            emissiveIntensity={0.55}
-            roughness={0.3}
-          />
-        </mesh>
-        <mesh position={[0, 0.99, 0]}>
-          <cylinderGeometry args={[0.37, 0.37, 0.42, 32]} />
-          <meshStandardMaterial color="#e8eef5" metalness={0.9} roughness={0.25} />
-        </mesh>
-      </group>
-    </Float>
-  );
-}
-
 /** Drifting particle field. */
 function Particles() {
   const ref = useRef<THREE.Points>(null);
@@ -139,12 +105,9 @@ export function HeroScene() {
       <pointLight position={[6, 6, 6]} intensity={130} color="#3CE0FF" />
       <pointLight position={[-6, -3, 4]} intensity={80} color="#6D4AFF" />
       <pointLight position={[0, 0, 6]} intensity={45} color="#ffffff" />
-      {/* helix + vial pushed to the right so the headline stays clear */}
+      {/* helix pushed to the right so the headline stays clear */}
       <group position={[2.7, 0, 0]} scale={0.92}>
         <Helix />
-      </group>
-      <group position={[3.05, -0.3, 1.4]}>
-        <Vial />
       </group>
       <Particles />
     </Canvas>

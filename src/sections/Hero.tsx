@@ -97,21 +97,20 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* right column — 3D scene shows through; static fallback when no WebGL */}
-        <div className="relative hidden min-h-[420px] lg:block">
-          {!webgl && (
-            <motion.div {...fade(0.5)} className="relative mx-auto w-full max-w-sm">
-              <div className="absolute inset-0 -z-10 rounded-full bg-accent/25 blur-3xl" />
-              <div className={reduced ? '' : 'animate-bob'}>
-                <Img
-                  name="hero/home-hero-product-image"
-                  alt="ALLUVI research formulation"
-                  fit="contain"
-                  className="h-[380px] w-full drop-shadow-[0_30px_60px_rgba(2,167,227,0.4)]"
-                />
-              </div>
-            </motion.div>
-          )}
+        {/* right column — floating product render over the 3D helix */}
+        <div className="relative hidden min-h-[560px] items-center justify-center lg:flex">
+          <motion.div {...fade(0.5)} className="relative">
+            <div className="absolute inset-0 -z-10 scale-[1.6] rounded-full bg-accent/30 blur-3xl" />
+            <div className={reduced ? '' : 'animate-bob'}>
+              <Img
+                name="hero/home-hero-product-image"
+                alt="ALLUVI research formulation"
+                fit="contain"
+                loading="eager"
+                className="w-[460px] rotate-90 drop-shadow-[0_30px_55px_rgba(2,167,227,0.5)]"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
 
