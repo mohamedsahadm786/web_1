@@ -1,0 +1,29 @@
+import { useEffect } from 'react';
+import Lenis from 'lenis';
+import { useReducedMotion } from './useReducedMotion';
+
+/** Mounts Lenis smooth scroll for the app lifetime. Disabled for reduced motion. */
+export function useLenis() {
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    if (reduced) return;
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    let raf = 0;
+    const loop = (time: number) => {
+      lenis.raf(time);
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis.destroy();
+    };
+  }, [reduced]);
+}
